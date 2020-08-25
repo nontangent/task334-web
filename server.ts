@@ -8,6 +8,9 @@ import { AppServerModule } from './src/main.server';
 import { APP_BASE_HREF } from '@angular/common';
 import { existsSync } from 'fs';
 import { UAParser } from 'ua-parser-js';
+import * as Meta from 'express-metatag';
+
+const ML = Meta('tags', true);
 
 function isChrome(name: string): boolean {
   console.log('name:', name);
@@ -36,18 +39,30 @@ export function app(): express.Express {
   }));
 
   // All regular routes use the Universal engine
-  server.get('*', (req, res) => {
-    const uaParser = new UAParser(req.headers['user-agent']);
-    if (
-      uaParser.getDevice().type == undefined &&
-      isChrome(uaParser.getBrowser().name)
-    ) {
-      res.redirect('https://chrome.google.com/webstore/detail/task334/cflanppcpbjbjekfpmfhnodjbpebelpm')
-    } else {
-      res.render(indexHtml, { req, providers: [{ provide: APP_BASE_HREF, useValue: req.baseUrl }] });
-    }
+  server.get('*', 
+    ML({
+      'og:title': '#TASK334',
+      'og:description': '140文字で管理する地上最ストイックなTODOアプリ。日本上陸！！',
+      'og:image': 'https://task334.app/assets/ogp.png',
+      'twitter:title': '#TASK334',
+      'twitter:card': 'summary_large_image',
+      'twitter:site': '@task334',
+      'twitter:creator': '@nontangent',
+      'twitter:description': '140文字で管理する地上最ストイックなTODOアプリ。日本上陸！！'
+    }),
+    (req, res, next) => {
+      const uaParser = new UAParser(req.headers['user-agent']);
+      if (
+        uaParser.getDevice().type == undefined &&
+        isChrome(uaParser.getBrowser().name)
+      ) {
+        res.redirect('https://chrome.google.com/webstore/detail/task334/cflanppcpbjbjekfpmfhnodjbpebelpm')
+      } else {
+        res.render(indexHtml, { req, providers: [{ provide: APP_BASE_HREF, useValue: req.baseUrl }] });
+      } 
 
-  });
+    }
+  );
 
   return server;
 }

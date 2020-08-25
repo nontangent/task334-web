@@ -28,6 +28,7 @@
     "@nguniversal/express-engine": "^10.0.2",
     "angular-atomic-schematics": "0.0.6",
     "express": "^4.15.2",
+    "express-metatag": "^0.1.0",
     "firebase": "^7.19.0",
     "rxjs": "~6.6.2",
     "tslib": "^2.0.0",
