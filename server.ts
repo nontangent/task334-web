@@ -7,6 +7,12 @@ import { join } from 'path';
 import { AppServerModule } from './src/main.server';
 import { APP_BASE_HREF } from '@angular/common';
 import { existsSync } from 'fs';
+import { UAParser } from 'ua-parser-js';
+
+function isChrome(name: string): boolean {
+  console.log('name:', name);
+  return ['Chrome', 'Chrome Headless', 'Chrome WebView', 'Chromium'].indexOf(name) != -1
+}
 
 // The Express app is exported so that it can be used by serverless Functions.
 export function app(): express.Express {
@@ -31,7 +37,16 @@ export function app(): express.Express {
 
   // All regular routes use the Universal engine
   server.get('*', (req, res) => {
-    res.render(indexHtml, { req, providers: [{ provide: APP_BASE_HREF, useValue: req.baseUrl }] });
+    const uaParser = new UAParser(req.headers['user-agent']);
+    if (
+      uaParser.getDevice().type == undefined &&
+      isChrome(uaParser.getBrowser().name)
+    ) {
+      res.redirect('https://chrome.google.com/webstore/detail/task334/cflanppcpbjbjekfpmfhnodjbpebelpm')
+    } else {
+      res.render(indexHtml, { req, providers: [{ provide: APP_BASE_HREF, useValue: req.baseUrl }] });
+    }
+
   });
 
   return server;
