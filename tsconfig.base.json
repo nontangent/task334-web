@@ -33,6 +33,12 @@
       ],
       "@app/*": [
         "src/app/*"
+      ],
+      "@models": [
+        "src/app/shared/models"
+      ],
+      "@models/*": [
+        "src/app/shared/models/*"
       ]
     }
   },

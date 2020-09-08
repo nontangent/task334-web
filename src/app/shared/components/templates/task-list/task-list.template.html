@@ -5,7 +5,9 @@
 </mat-toolbar>
 <mat-list role="list">
   <ng-container *ngFor="let task of tasks;">
-    <mat-list-item role="listitem">{{ task.name }}</mat-list-item>
+    <mat-list-item role="listitem" matRipple>
+      {{ task.name }}
+    </mat-list-item>
     <mat-divider></mat-divider>
   </ng-container>
 </mat-list>

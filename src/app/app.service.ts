@@ -3,6 +3,7 @@ import { AuthService } from '@services/auth/auth.service';
 import { Router } from '@angular/router';
 
 import * as operators from 'rxjs/operators';
+import { TasksService } from '@services/tasks/tasks.service';
 
 @Injectable({
   providedIn: 'root'
@@ -10,8 +11,9 @@ import * as operators from 'rxjs/operators';
 export class AppService {
 
   constructor(
+    private router: Router,
     public auth: AuthService,
-    private router: Router 
+    public tasks: TasksService
   ) {
     this.doesFirebaseDataExist().then(() => {
       return this.isLoggedIn();

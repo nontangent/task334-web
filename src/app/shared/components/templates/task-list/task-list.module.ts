@@ -5,6 +5,7 @@ import { TaskListTemplate } from './task-list.template';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatListModule } from '@angular/material/list';
 import { MatDividerModule } from '@angular/material/divider';
+import { MatRippleModule } from '@angular/material/core';
 
 @NgModule({
   declarations: [TaskListTemplate],
@@ -12,7 +13,8 @@ import { MatDividerModule } from '@angular/material/divider';
     CommonModule,
     MatToolbarModule,
     MatListModule,
-    MatDividerModule
+    MatDividerModule,
+    MatRippleModule
   ],
   exports: [TaskListTemplate]
 })

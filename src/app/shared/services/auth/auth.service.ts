@@ -7,6 +7,8 @@ import { Observable, combineLatest, of } from "rxjs";
 import * as operators from 'rxjs/operators';
 import { isPlatformBrowser } from '@angular/common';
 
+import * as models from '@models';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -27,8 +29,12 @@ export class AuthService {
       return {
         ...user,
         id: id
-      }
+      } as models.User;
     })
+  );
+
+  userId$: Observable<string> = this.user$.pipe(
+    operators.map((user) => user.id)
   );
 
   constructor(

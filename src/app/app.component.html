@@ -1,6 +1,6 @@
 <div class="sp-frame">
 	<div class="main page">
-		<templates-task-list></templates-task-list>
+		<templates-task-list [tasks]="appService.tasks.tasks$ | async"></templates-task-list>
 	</div>
 	<div class="popup page">
 		<router-outlet></router-outlet>

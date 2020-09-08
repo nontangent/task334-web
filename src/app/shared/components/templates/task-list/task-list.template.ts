@@ -1,8 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-
-export interface Task {
-  name: string;
-}
+import { Component, OnInit, Input } from '@angular/core';
+import * as models from '@models';
 
 @Component({
   selector: 'templates-task-list',
@@ -11,17 +8,8 @@ export interface Task {
 })
 export class TaskListTemplate implements OnInit {
 
-  _tasks: Task[] = [
-    {
-      name: 'テスト'
-    }
-  ]
-
-  get tasks() {
-    return [...Array(10)].map((_, index) => {
-      return {name: `Tast ${index}`}
-    })
-  }
+  @Input()
+  tasks: models.Task[] = []
 
   constructor() { }
 
