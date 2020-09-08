@@ -9,16 +9,16 @@
         "@schematics/angular:component": {
           "style": "scss"
         },
-        "angular-atomic-schematics/dist/collection.json:atom": {
+        "angular-atomic-schematics:atom": {
           "path": "src/app/shared/components/atoms"
         },
-        "angular-atomic-schematics/dist/collection.json:molecule": {
+        "angular-atomic-schematics:molecule": {
           "path": "src/app/shared/components/molecules"
         },
-        "angular-atomic-schematics/dist/collection.json:organism": {
+        "angular-atomic-schematics:organism": {
           "path": "src/app/shared/components/organisms"
         },
-        "angular-atomic-schematics/dist/collection.json:template": {
+        "angular-atomic-schematics:template": {
           "path": "src/app/shared/components/templates"
         }
       },
@@ -27,7 +27,7 @@
       "prefix": "app",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:browser",
+          "builder": "angular-custom-webpack-chaining:browser",
           "options": {
             "outputPath": "dist/task334/browser",
             "index": "src/index.html",
@@ -45,7 +45,13 @@
             "scripts": [],
             "stylePreprocessorOptions": {
               "includePaths": [
-                "src/styles"
+                "src/styles",
+                "node_modules/host-css-variable"
+              ]
+            },
+            "customWebpackConfig": {
+              "chain": [
+                "node_modules/angular-host-css-variable"
               ]
             }
           },
@@ -81,9 +87,12 @@
           }
         },
         "serve": {
-          "builder": "@angular-devkit/build-angular:dev-server",
+          "builder": "angular-custom-webpack-chaining:dev-server",
           "options": {
-            "browserTarget": "task334:build"
+            "browserTarget": "task334:build",
+            "customWebpackConfig": {
+              "chain": []
+            }
           },
           "configurations": {
             "production": {
@@ -98,7 +107,7 @@
           }
         },
         "test": {
-          "builder": "@angular-devkit/build-angular:karma",
+          "builder": "angular-custom-webpack-chaining:karma",
           "options": {
             "main": "src/test.ts",
             "polyfills": "src/polyfills.ts",
@@ -111,7 +120,10 @@
             "styles": [
               "src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [],
+            "customWebpackConfig": {
+              "chain": []
+            }
           }
         },
         "lint": {
@@ -141,11 +153,17 @@
           }
         },
         "server": {
-          "builder": "@angular-devkit/build-angular:server",
+          "builder": "angular-custom-webpack-chaining:server",
           "options": {
             "outputPath": "dist/task334/server",
             "main": "server.ts",
-            "tsConfig": "tsconfig.server.json"
+            "tsConfig": "tsconfig.server.json",
+            "externalDependencies": [
+              "@firebase/firestore"
+            ],
+            "customWebpackConfig": {
+              "chain": []
+            }
           },
           "configurations": {
             "production": {
@@ -186,6 +204,12 @@
           "configurations": {
             "production": {}
           }
+        },
+        "deploy": {
+          "builder": "@angular/fire:deploy",
+          "options": {
+            "ssr": true
+          }
         }
       }
     }
@@ -193,6 +217,6 @@
   "defaultProject": "task334",
   "cli": {
     "analytics": "088d60d8-028d-4a88-b3a2-b3117ba51b5a",
-    "defaultCollection": "angular-atomic-schematics/dist/collection.json"
+    "defaultCollection": "angular-atomic-schematics"
   }
 }

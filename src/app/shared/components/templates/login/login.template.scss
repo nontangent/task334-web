@@ -1,0 +1,7 @@
+@import 'host-variable';
+@import 'atomic/template';
+$host: host('login');
+
+:host {
+	@include template($host);
+}

@@ -1,0 +1,11 @@
+<mat-toolbar color="primary">
+    <mat-toolbar-row>
+      <span># TASK334</span>
+    </mat-toolbar-row>
+</mat-toolbar>
+<mat-list role="list">
+  <ng-container *ngFor="let task of tasks;">
+    <mat-list-item role="listitem">{{ task.name }}</mat-list-item>
+    <mat-divider></mat-divider>
+  </ng-container>
+</mat-list>

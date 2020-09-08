@@ -1,0 +1,35 @@
+:host {
+    display: flex;
+    justify-content: center;
+
+    width: 100vw;
+    height: 100vh;
+
+    background-color: black;
+
+    .sp-frame {
+        position: relative;
+        width: 360px;
+
+        .main.page {
+            position: absolute;
+            top: 0;
+            left: 0;
+
+            width: 100%;
+            min-height: 100vh;
+
+            background-color: white;
+        }
+
+        .popup.page {
+            position: absolute;
+            top: 0;
+            left: 0;
+
+            width: 100%;
+        }
+
+
+    }
+}

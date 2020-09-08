@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "task334-c700c": {
+      "hosting": {
+        "task334": [
+          "task334-c700c"
+        ]
+      }
+    }
+  }
+}

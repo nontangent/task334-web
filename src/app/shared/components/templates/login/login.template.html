@@ -1,0 +1,8 @@
+<mat-toolbar color="primary">
+    <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+      <mat-icon (click)="onBackButtonClick.emit($event)">arrow_back</mat-icon>
+    </button>
+    <span>ログイン</span>
+    <span class="example-spacer"></span>
+  </mat-toolbar>
+<button matButton (click)="onTwitterSignInButtonClick.emit($event)">Twitterでタスク管理を始める</button>

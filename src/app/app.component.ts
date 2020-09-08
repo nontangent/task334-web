@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FirebaseService } from './services';
+import { AppService } from '@app/app.service';
 
 @Component({
   selector: 'app-root',
@@ -9,9 +10,11 @@ import { FirebaseService } from './services';
 export class AppComponent {
   title = 'task334';
 
-	constructor(private firebaseService: FirebaseService) {  }
+	constructor(
+    public appService: AppService
+  ) {  }
 
-	onClickTwitterLoginButton() {
-		this.firebaseService.signInWithTwitter();
+	onTwitterLoginButtonClick() {
+    this.appService.auth.signInWithTwitter()
 	}
 }
