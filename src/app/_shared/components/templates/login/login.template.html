@@ -1,8 +1,15 @@
-<mat-toolbar color="primary">
-    <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
-      <mat-icon (click)="onBackButtonClick.emit($event)">arrow_back</mat-icon>
-    </button>
-    <span>ログイン</span>
-    <span class="example-spacer"></span>
-  </mat-toolbar>
-<button matButton (click)="onTwitterSignInButtonClick.emit($event)">Twitterでタスク管理を始める</button>
+<!-- <mat-toolbar color="primary">
+  <button mat-icon-button aria-label="Back">
+    <mat-icon (click)="onBackButtonClick.emit($event)">arrow_back</mat-icon>
+  </button>
+  <span>ログイン</span>
+  <span class="spacer"></span>
+</mat-toolbar> -->
+
+<section class="banner">
+  <molecules-task334-banner></molecules-task334-banner>
+</section>
+
+<section class="sign-in">
+  <button mat-raised-button (click)="onTwitterSignInButtonClick.emit()">Twitterでタスク管理を始める</button>
+</section>

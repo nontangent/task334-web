@@ -5,3 +5,38 @@ $host: host('login');
 :host {
 	@include template($host);
 }
+
+:host {
+
+	section.banner {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		width: hvar(--width);
+		height: calc(100vh - hvar(--cell) * 14);
+
+		molecules-task334-banner {
+			padding: 0 calc(hvar(--cell) * 2);
+			--width: calc(hvar(--width) - hvar(--cell) * 4);
+		}
+	}
+
+	section.sign-in {
+		display: flex;
+		width: hvar(--width);
+		height: calc(hvar(--cell) * 14);
+
+		justify-content: center;
+		align-items: center;
+
+		button {
+			height: calc(hvar(--cell) * 6);
+			width: calc(hvar(--width) - hvar(--cell) * 4);
+			border-radius: calc(hvar(--cell) * 3);
+			background-color: #3AA1F2;
+			color: white;
+			font-weight: bold;
+		}
+	}
+
+}

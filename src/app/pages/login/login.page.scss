@@ -5,3 +5,11 @@ $host: host('login');
 :host {
 	@include page($host);
 }
+
+:host {
+	frames-overlay {
+		templates-login {
+			--width: 360px;
+		}
+	}
+}

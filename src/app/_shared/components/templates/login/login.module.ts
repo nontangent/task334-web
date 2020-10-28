@@ -5,7 +5,9 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 
-
+import {
+  Task334BannerModule
+} from '@components/molecules';
 
 @NgModule({
   declarations: [LoginTemplate],
@@ -14,6 +16,7 @@ import { MatButtonModule } from '@angular/material/button';
     MatToolbarModule,
     MatIconModule,
     MatButtonModule,
+    Task334BannerModule
   ],
   exports: [LoginTemplate]
 })
