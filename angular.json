@@ -10,16 +10,16 @@
           "style": "scss"
         },
         "angular-atomic-schematics:atom": {
-          "path": "src/app/shared/components/atoms"
+          "path": "src/app/_shared/components/atoms"
         },
         "angular-atomic-schematics:molecule": {
-          "path": "src/app/shared/components/molecules"
+          "path": "src/app/_shared/components/molecules"
         },
         "angular-atomic-schematics:organism": {
-          "path": "src/app/shared/components/organisms"
+          "path": "src/app/_shared/components/organisms"
         },
         "angular-atomic-schematics:template": {
-          "path": "src/app/shared/components/templates"
+          "path": "src/app/_shared/components/templates"
         }
       },
       "root": "",
@@ -162,7 +162,15 @@
               "@firebase/firestore"
             ],
             "customWebpackConfig": {
-              "chain": []
+              "chain": [
+                "node_modules/angular-host-css-variable"
+              ]
+            },
+            "stylePreprocessorOptions": {
+              "includePaths": [
+                "src/styles",
+                "node_modules/host-css-variable"
+              ]
             }
           },
           "configurations": {

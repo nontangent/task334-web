@@ -1,0 +1,34 @@
+<mat-toolbar color="primary">
+    <mat-toolbar-row>
+      <span># TASK334</span>
+    </mat-toolbar-row>
+</mat-toolbar>
+
+<div class="contents" style="position: relative;">
+  <mat-list role="list" style="position: absolute; top: 0; left: 0;">
+    <ng-container *ngFor="let task of tasks;index as i;">
+      <mat-list-item role="listitem" style="display: flex; justify-content: space-between;">
+        <div class="bg-status done">DONE</div> <div class="bg-status left">LEFT</div>
+      </mat-list-item>
+      <mat-divider></mat-divider>
+    </ng-container>
+  </mat-list>
+  
+  <mat-list role="list" style="position: absolute; top: 0; left: 0;">
+    <ng-container *ngFor="let task of tasks;index as i;">
+      <mat-list-item 
+        role="listitem" 
+        matRipple 
+        cdkDragLockAxis="x" 
+        cdkDrag
+        (cdkDragStarted)="dragStarted($event)"
+        (cdkDragMoved)="dragMoved($event)"
+        (cdkDragEnded)="dragEnded($event)"
+        [attr.mode]="Mode.WIP"
+      >
+        {{ i }}.{{ task.name }}
+      </mat-list-item>
+      <mat-divider></mat-divider>
+    </ng-container>
+  </mat-list>
+</div>

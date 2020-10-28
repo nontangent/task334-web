@@ -1,0 +1,11 @@
+@import 'host-variable';
+@import 'atomic/page';
+$host: host('index');
+
+:host {
+	@include page($host);
+}
+
+:host {
+	display: none;
+}

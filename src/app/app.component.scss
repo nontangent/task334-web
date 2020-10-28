@@ -7,29 +7,11 @@
 
     background-color: black;
 
-    .sp-frame {
-        position: relative;
-        width: 360px;
+    frames-overlay {
+        --width: 360px;
 
-        .main.page {
-            position: absolute;
-            top: 0;
-            left: 0;
-
-            width: 100%;
-            min-height: 100vh;
-
-            background-color: white;
+        templates-task-list {
+            --width: 360px;
         }
-
-        .popup.page {
-            position: absolute;
-            top: 0;
-            left: 0;
-
-            width: 100%;
-        }
-
-
     }
 }

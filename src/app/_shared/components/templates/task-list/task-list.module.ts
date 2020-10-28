@@ -7,6 +7,8 @@ import { MatListModule } from '@angular/material/list';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatRippleModule } from '@angular/material/core';
 
+import { DragDropModule } from '@angular/cdk/drag-drop';
+
 @NgModule({
   declarations: [TaskListTemplate],
   imports: [
@@ -14,7 +16,8 @@ import { MatRippleModule } from '@angular/material/core';
     MatToolbarModule,
     MatListModule,
     MatDividerModule,
-    MatRippleModule
+    MatRippleModule,
+    DragDropModule
   ],
   exports: [TaskListTemplate]
 })

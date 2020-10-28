@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
 import { LoginPage } from './login.page';
 
+import { OverlayModule } from '@components/frames';
 import { LoginModule as LoginTemplateModule } from '@components/templates';
 
 const routes: Routes = [
@@ -18,7 +19,8 @@ const routes: Routes = [
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
-    LoginTemplateModule
+    LoginTemplateModule,
+    OverlayModule
   ],
   exports: [LoginPage]
 })

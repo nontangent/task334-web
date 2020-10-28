@@ -17,16 +17,16 @@
     ],
     "paths": {
       "@components": [
-        "src/app/shared/components"
+        "src/app/_shared/components"
       ],
       "@components/*": [
-        "src/app/shared/components/*"
+        "src/app/_shared/components/*"
       ],
       "@services": [
-        "src/app/shared/services"
+        "src/app/_shared/services"
       ],
       "@services/*": [
-        "src/app/shared/services/*"
+        "src/app/_shared/services/*"
       ],
       "@app": [
         "src/app"
@@ -35,10 +35,16 @@
         "src/app/*"
       ],
       "@models": [
-        "src/app/shared/models"
+        "src/app/_shared/models"
       ],
       "@models/*": [
-        "src/app/shared/models/*"
+        "src/app/_shared/models/*"
+      ],
+      "@animations": [
+        "src/app/_shared/animations"
+      ],
+      "@animations/*": [
+        "src/app/_shared/animations/*"
       ]
     }
   },
