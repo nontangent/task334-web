@@ -1,0 +1,17 @@
+@import 'host-variable';
+@import 'atomic/atom';
+$host: host('task334-icon');
+
+:host {
+	@include atom($host);
+}
+
+:host {
+	width: hvar(--width);
+	height: hvar(--width);
+
+	svg {
+		width: 100%;
+		height: 100%;
+	}
+}

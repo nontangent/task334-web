@@ -1,0 +1,18 @@
+@import 'host-variable';
+@import 'atomic/atom';
+$host: host('task334-logo');
+
+:host {
+	@include atom($host);
+}
+
+:host {
+	display: flex;
+	width: hvar(--width);
+	height: calc(hvar(--width) / 98.851 * 15.322);
+
+	svg {
+		width: hvar(--width);
+		height: calc(hvar(--width) / 98.851 * 15.322);
+	}
+}

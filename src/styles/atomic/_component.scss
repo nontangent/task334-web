@@ -9,10 +9,10 @@
   @include hvar(--cell, 8px);
 
 	* {
-    --base-color: hvar(--primary-color);
-    --main-color: hvar(--secondary-color);
-    --accent-color: hvar(--tertiary-color);
-    --cell: hvar(--cell);
+    --base-color: #{hvar(--primary-color)};
+    --main-color: #{hvar(--secondary-color)};
+    --accent-color: #{hvar(--tertiary-color)};
+    --cell: #{hvar(--cell)};
   }
 }
 

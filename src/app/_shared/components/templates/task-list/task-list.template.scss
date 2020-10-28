@@ -7,38 +7,82 @@ $host: host('task-list');
 }
 
 :host {
+	organisms-top-navigator {
+		--width: #{hvar(--width)};
+		--height: calc(hvar(--cell) * 8);
+	}
+
 	div.contents {
 		width: hvar(--width);
 		height: hvar(--height);
+
+		background-color: #F0F0F0;
 	}
 
-	mat-list {
+	mat-list.bg {
+		padding-top: 0;
+
+		mat-list-item {
+			height: calc(hvar(--cell) * 8);
+
+			::ng-deep .mat-list-item-content {
+				padding: 0px;
+			}
+	
+			.bg-status {
+				display: flex;
+				width: calc(hvar(--width) / 2 - hvar(--cell) * 2);
+				height: 100%;
+
+				align-items: center;
+				color: white;
+				font-weight: bold;
+	
+				&.done {
+					padding-left: calc(hvar(--cell) * 2);
+					justify-content: flex-start;
+					background-color: #3AA1F2;
+				}
+	
+				&.left {
+					padding-right: calc(hvar(--cell) * 2);
+					justify-content: flex-end;
+					background-color: #8899A6;
+				}
+			}
+		}
+	}
+
+	mat-list.items {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+
 		width: hvar(--width);
 		padding-top: 0;
-	}
 
-	mat-list-item {
-		width: hvar(--width);
-		background-color: white;
-
-		cursor: pointer;
-		user-select: none;
-		transform: translate3d(0px, 0px, 0px);
-		
-		&:not([dragging]) {
-			transition: transform 0.3s;
-		}
-
-		&[mode="done"] {
-			transform: translate3d(calc(100% / 2), 0px, 0px);
-		}
-
-		&[mode="left"] {
-			transform: translate3d(calc(-1 * 100% / 2), 0px, 0px);
-		}
-
-		.bg-status {
-			width: calc(hvar(--width) / 2);
+		mat-list-item {
+			width: calc(hvar(--width) - hvar(--cell) * 4);
+			height: calc(hvar(--cell) * 8);
+			background-color: white;
+			color: #25282A;
+			font-weight: bold;
+	
+			cursor: pointer;
+			user-select: none;
+			transform: translate3d(0px, 0px, 0px);
+			
+			&:not([dragging]) {
+				transition: transform 0.3s;
+			}
+	
+			&[mode="done"] {
+				transform: translate3d(calc(100% / 2), 0px, 0px);
+			}
+	
+			&[mode="left"] {
+				transform: translate3d(calc(-1 * 100% / 2), 0px, 0px);
+			}
 		}
 	}
 }

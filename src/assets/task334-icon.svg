@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="512" height="512" viewBox="0 0 512 512">
+  <defs>
+    <clipPath id="clip-task334-icon">
+      <rect width="512" height="512"/>
+    </clipPath>
+  </defs>
+  <g id="task334-icon" clip-path="url(#clip-task334-icon)">
+    <g id="グループ_27" data-name="グループ 27">
+      <circle id="楕円形_6" data-name="楕円形 6" cx="256" cy="256" r="256" fill="#fff"/>
+      <g id="グループ_16" data-name="グループ 16">
+        <g id="グループ_15" data-name="グループ 15" transform="translate(60 88.842)">
+          <rect id="長方形_185" data-name="長方形 185" width="336.5" height="38" rx="19" transform="translate(37 65.658)" fill="#25282a"/>
+          <rect id="長方形_186" data-name="長方形 186" width="336" height="37.5" rx="18.75" transform="translate(0 239.658)" fill="#25282a"/>
+          <rect id="長方形_187" data-name="長方形 187" width="336.241" height="37.733" rx="18.866" transform="matrix(-0.259, 0.966, -0.966, -0.259, 334.012, 9.953)" fill="#25282a"/>
+          <rect id="長方形_188" data-name="長方形 188" width="336.241" height="37.733" rx="18.866" transform="matrix(-0.259, 0.966, -0.966, -0.259, 157.43, 9.766)" fill="#25282a"/>
+        </g>
+        <circle id="楕円形_5" data-name="楕円形 5" cx="256" cy="256" r="256" fill="none"/>
+        <g id="パス_11" data-name="パス 11" transform="translate(127.5 139.5)">
+          <path id="パス_12" data-name="パス 12" d="M136.8,353.694a14.972,14.972,0,0,1-9.932-3.758l-81.729-72.2A15,15,0,0,1,65,255.256l72.106,63.7,154.848-128.4a15,15,0,0,1,19.148,23.094L146.376,350.241A14.969,14.969,0,0,1,136.8,353.694Z" transform="translate(-40.073 -187.102)" fill="#3aa1f2"/>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>

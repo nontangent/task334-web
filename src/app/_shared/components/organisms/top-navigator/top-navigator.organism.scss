@@ -1,0 +1,30 @@
+@import 'host-variable';
+@import 'atomic/organism';
+$host: host('top-navigator');
+
+:host {
+	@include organism($host);
+}
+
+:host {
+	width: hvar(--width);
+	height: hvar(--height);
+
+	mat-toolbar {
+		width: hvar(--width);
+		height: hvar(--height);
+
+		background-color: white;
+		border-bottom: 1px solid #E6ECF1;
+
+		atoms-task334-icon {
+			--width: calc(hvar(--cell) * 4);
+		}
+	
+		atoms-task334-logo {
+			--width: calc(hvar(--cell) * 14);
+	
+			padding-left: calc(hvar(--cell) * 0.5);
+		}
+	}
+}
