@@ -54,12 +54,9 @@ $host: host('task-list');
 	}
 
 	mat-list.items {
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-
-		width: hvar(--width);
+		width: calc(hvar(--width) - hvar(--cell) * 4);
 		padding-top: 0;
+		padding-left: calc(hvar(--cell) * 2);
 
 		mat-list-item {
 			width: calc(hvar(--width) - hvar(--cell) * 4);

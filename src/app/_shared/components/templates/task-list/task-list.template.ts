@@ -41,15 +41,18 @@ export class TaskListTemplate implements OnInit, AfterViewInit {
   dragMoved({distance, source}: CdkDragMove) {
     switch(this.getSourceMode(source)) {
       case Mode.WIP: {
-        this.setSourcePropertyX(source, distance.x);
-        break;
+        this.setSourcePropertyX(source, 
+          Math.sign(distance.x) == 1
+          ? Math.min(distance.x, this.width / 2) - 16
+          : Math.max(distance.x, -1 * this.width / 2) + 16
+        ); break;
       }
       case Mode.LEFT: {
-        this.setSourcePropertyX(source, distance.x - this.width / 2); 
+        this.setSourcePropertyX(source, Math.max(0, distance.x) - this.width / 2 + 16); 
         break;
       }
       case Mode.DONE: {
-        this.setSourcePropertyX(source, distance.x + this.width / 2);
+        this.setSourcePropertyX(source, Math.min(0, distance.x) + this.width / 2 - 16);
         break;
       }
     }
@@ -57,8 +60,6 @@ export class TaskListTemplate implements OnInit, AfterViewInit {
 
   dragEnded(event: CdkDragEnd) {
     const {source, distance} = event;
-
-
 
     switch(this.getSourceMode(source)) {
       case Mode.WIP: {
