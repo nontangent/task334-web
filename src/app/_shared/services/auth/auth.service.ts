@@ -1,13 +1,11 @@
 import { Injectable, Inject, PLATFORM_ID } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore } from '@angular/fire/firestore';
-import * as firebase from 'firebase';
+import * as firebase from 'firebase/app';
 
-import { Observable, combineLatest, of } from "rxjs";
-import { map, filter, switchMap, distinctUntilChanged } from 'rxjs/operators';
+import { Observable } from "rxjs";
+import { map, filter, distinctUntilChanged } from 'rxjs/operators';
 import { isPlatformBrowser } from '@angular/common';
-
-import * as models from '@models';
 
 @Injectable({
   providedIn: 'root'
@@ -39,7 +37,7 @@ export class AuthService {
           accessToken: (result?.credential as any)?.accessToken,
           secret: (result?.credential as any)?.secret
         });
-        
+
       });
     }
     

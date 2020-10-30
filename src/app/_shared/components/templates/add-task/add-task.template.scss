@@ -1,0 +1,7 @@
+@import 'host-variable';
+@import 'atomic/template';
+$host: host('add-task');
+
+:host {
+	@include template($host);
+}

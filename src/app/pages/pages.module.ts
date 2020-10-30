@@ -18,15 +18,19 @@ export function addData(canActivate, data: {}) {
 
 const routes: Routes = [
 	{
+		path: 'task',
+		loadChildren: () => import('./task/task.module').then(m => m.TaskModule)
+	},
+	{
 		path: 'login',
     loadChildren: () => import('./login/login.module').then(m => m.LoginModule),
-    ...addData(redirectLoggedIn, {animation: 'LoginPage'})
+    // ...addData(redirectLoggedIn, {animation: 'LoginPage'})
 	},
   {
     path: '',
     pathMatch: 'full',
 		loadChildren: () => import('./index/index.module').then(m => m.IndexModule),
-    ...addData(redirectUnauthorized, {animation: 'IndexPage'})
+    // ...addData(redirectUnauthorized, {animation: 'IndexPage'})
   },
   {
     path: '**',

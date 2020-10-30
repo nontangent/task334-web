@@ -1,10 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { AuthService } from '../auth/auth.service';
 import {map, switchMap} from 'rxjs/operators';
 import * as models from '@models';
-import { Observable } from 'rxjs';
-import * as firebase from 'firebase/app';
 
 export function parseUserId(path: string) {
   return path.match(/users\/(.*?)\//)[1];
@@ -52,7 +49,7 @@ export class TasksService {
   updateTask(task: models.Task): Promise<void> {
     return this._setTask({
       ...task,
-      updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+      updatedAt: models.FieldValue.serverTimestamp()
     });
   }
 

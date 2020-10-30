@@ -25,5 +25,4 @@ export class OverlayFrame implements OnInit {
     return outlet?.activatedRouteData?.animation;
   }
 
-
 }

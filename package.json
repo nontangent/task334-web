@@ -10,8 +10,10 @@
     "e2e": "ng e2e",
     "dev:ssr": "ng run task334:serve-ssr",
     "serve:ssr": "node dist/task334/server/main.js",
-    "build:ssr": "ng build --prod && ng run task334:server:production",
-    "prerender": "ng run task334:prerender"
+    "build:server": "task334:server:production",
+    "build:ssr": "ng build --prod && npm run build:server",
+    "prerender": "ng run task334:prerender",
+    "deploy": "ng deploy"
   },
   "private": true,
   "dependencies": {

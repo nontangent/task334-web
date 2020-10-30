@@ -55,7 +55,8 @@
             },
             "customWebpackConfig": {
               "chain": [
-                "node_modules/angular-host-css-variable"
+                "node_modules/angular-host-css-variable",
+                "webpack.config.js"
               ]
             }
           },
@@ -167,7 +168,8 @@
             ],
             "customWebpackConfig": {
               "chain": [
-                "node_modules/angular-host-css-variable"
+                "node_modules/angular-host-css-variable",
+                "webpack.config.js"
               ]
             },
             "stylePreprocessorOptions": {

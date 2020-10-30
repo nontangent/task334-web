@@ -1,0 +1,7 @@
+@import 'host-variable';
+@import 'atomic/page';
+$host: host('task');
+
+:host {
+	@include page($host);
+}
