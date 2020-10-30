@@ -4,7 +4,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import * as firebase from 'firebase';
 
 import { Observable, combineLatest, of } from "rxjs";
-import * as operators from 'rxjs/operators';
+import { map, filter, switchMap, distinctUntilChanged } from 'rxjs/operators';
 import { isPlatformBrowser } from '@angular/common';
 
 import * as models from '@models';
@@ -14,27 +14,13 @@ import * as models from '@models';
 })
 export class AuthService {
 
-  firebaseUser$: any = this.fireAuth.authState.pipe(
-    operators.filter((user) => user?.uid ? true : false)
+  auth$: Observable<firebase.User> = this.fireAuth.authState.pipe(
+    filter((user) => user?.uid ? true : false)
   );
 
-  user$: Observable<any> = this.firebaseUser$.pipe(
-    operators.switchMap((user: any) => {
-      return combineLatest(
-        of(user.uid),
-        this.firestore.collection('users').doc(user.uid).valueChanges()
-      )
-    }),
-    operators.map(([id, user]) => {
-      return {
-        ...user,
-        id: id
-      } as models.User;
-    })
-  );
-
-  userId$: Observable<string> = this.user$.pipe(
-    operators.map((user) => user.id)
+  userId$: Observable<string> = this.auth$.pipe(
+    map(auth => auth.uid),
+    distinctUntilChanged()
   );
 
   constructor(
@@ -44,12 +30,9 @@ export class AuthService {
   ) {
     
     if (isPlatformBrowser(this.platform)) {
-			firebase.auth().getRedirectResult().then(result => {
-        if (!result?.user) {
-          return 
-        }
+      this.fireAuth.getRedirectResult().then(result => {
+        if (!result?.user) return;
 
-        console.log('result:', result);
         this.saveTwitter({
           uid: result?.user?.uid,
           id: (result?.additionalUserInfo as any)?.profile?.id_str,
@@ -57,7 +40,7 @@ export class AuthService {
           secret: (result?.credential as any)?.secret
         });
         
-      })
+      });
     }
     
   }

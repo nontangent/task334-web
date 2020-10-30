@@ -1,6 +1,7 @@
 <frames-overlay [outlet]="outlet">
 	<templates-task-list 
-		[tasks]="appService.tasks.tasks$ | async"
+		[tasks]="tasks$ | async"
+		(onTaskStatusChange)="onTaskStatusChange($event)"
 		mainPage
 	></templates-task-list>
 	<router-outlet #outlet="outlet" nextPage></router-outlet>

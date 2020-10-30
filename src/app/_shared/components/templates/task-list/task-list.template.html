@@ -19,7 +19,7 @@
         cdkDrag
         (cdkDragStarted)="dragStarted($event)"
         (cdkDragMoved)="dragMoved($event)"
-        (cdkDragEnded)="dragEnded($event)"
+        (cdkDragEnded)="dragEnded($event, task)"
         [attr.mode]="Mode.WIP"
       >
         {{ i }}.{{ task.name }}

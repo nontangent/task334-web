@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ElementRef, AfterViewInit } from '@angular/core';
+import { Component, OnInit, Input, ElementRef, AfterViewInit, Output, EventEmitter } from '@angular/core';
 import * as models from '@models';
 import { CdkDrag, CdkDragEnd, CdkDragMove, CdkDragStart } from '@angular/cdk/drag-drop';
 
@@ -22,6 +22,9 @@ export class TaskListTemplate implements OnInit, AfterViewInit {
 
   @Input()
   tasks: models.Task[] = []
+
+  @Output()
+  onTaskStatusChange = new EventEmitter();
 
   width: number = 0;
 
@@ -58,25 +61,29 @@ export class TaskListTemplate implements OnInit, AfterViewInit {
     }
   }
 
-  dragEnded(event: CdkDragEnd) {
+  dragEnded(event: CdkDragEnd, task: models.Task) {
     const {source, distance} = event;
 
     switch(this.getSourceMode(source)) {
       case Mode.WIP: {
         if (distance.x < -1 * this.width * this.thresholdRate) {
           source.element.nativeElement.setAttribute('mode', Mode.LEFT);
+          this.onTaskStatusChange.emit([task, models.TaskStatus.LEFT]);
         } else if (distance.x > this.width * this.thresholdRate) {
           source.element.nativeElement.setAttribute('mode', Mode.DONE);
+          this.onTaskStatusChange.emit([task, models.TaskStatus.DONE]);
         } break;
       }
       case Mode.LEFT: {
         if (distance.x > this.width * this.thresholdRate) {
           source.element.nativeElement.setAttribute('mode', Mode.WIP);
+          this.onTaskStatusChange.emit([task, models.TaskStatus.WIP]);
         } break;
       }
       case Mode.DONE: {
         if (distance.x < -1 * this.width * this.thresholdRate) {
           source.element.nativeElement.setAttribute('mode', Mode.WIP);
+          this.onTaskStatusChange.emit([task, models.TaskStatus.WIP]);
         } break;
       }
     }

@@ -20,6 +20,10 @@
         },
         "angular-atomic-schematics:template": {
           "path": "src/app/_shared/components/templates"
+        },
+        "angular-atomic-schematics:service": {
+          "flat": false,
+          "path": "src/app/_shared/services"
         }
       },
       "root": "",

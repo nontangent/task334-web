@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
-import { FirebaseService } from './services';
 import { AppService } from '@app/app.service';
+
+import * as models from '@models';
+import { switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-root',
@@ -10,11 +12,19 @@ import { AppService } from '@app/app.service';
 export class AppComponent {
   title = 'task334';
 
+  tasks$ = this.app.auth.userId$.pipe(
+    switchMap(userId => this.app.tasks.getTasks(userId))
+  );
+
 	constructor(
-    public appService: AppService
+    public app: AppService
   ) {  }
 
 	onTwitterLoginButtonClick() {
-    this.appService.auth.signInWithTwitter()
-	}
+    this.app.auth.signInWithTwitter();
+  }
+  
+  onTaskStatusChange([task, status]: [models.Task, models.TaskStatus]) {
+    this.app.tasks.updateTask({...task, status: status});
+  }
 }
