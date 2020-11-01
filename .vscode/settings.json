@@ -1,6 +1,10 @@
 {
     "cSpell.ignoreWords": [
+        "config",
         "firestore",
-        "hvar"
+        "hvar",
+        "ngsw",
+        "ngsw config path",
+        "path"
     ]
 }
