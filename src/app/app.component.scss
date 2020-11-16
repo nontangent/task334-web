@@ -17,6 +17,7 @@
 
     button.add.task {
         position: fixed;
+        z-index: 1000;
         right: 16px;
         bottom: 16px;
     }
