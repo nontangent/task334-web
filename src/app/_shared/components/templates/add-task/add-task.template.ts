@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'templates-add-task',
@@ -7,7 +8,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AddTaskTemplate implements OnInit {
 
-  constructor() { }
+  @Input()
+  formGroup = this.fb.group({
+    'taskName': ['']
+  });
+
+  @Output()
+  onBackButtonClick = new EventEmitter();
+
+  @Output()
+  onAddButtonClick = new EventEmitter();
+
+  constructor(
+    private fb: FormBuilder
+  ) { }
 
   ngOnInit(): void {
   }

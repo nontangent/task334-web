@@ -6,3 +6,13 @@
 	></templates-task-list>
 	<router-outlet #outlet="outlet" nextPage></router-outlet>
 </frames-overlay>
+
+<button 
+	class="add task" 
+	mat-fab 
+	color="primary" 
+	aria-label="Add Task Button"
+	(click)="onAddButtonClick()"
+>
+	<mat-icon>add</mat-icon>
+</button>

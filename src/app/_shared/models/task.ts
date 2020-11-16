@@ -18,3 +18,14 @@ export interface Task {
     createdAt: moment.Moment | Timestamp | FieldValue;
     updatedAt: moment.Moment | Timestamp | FieldValue;
 }
+
+export const nullTask: Task = {
+    id: null,
+    ownerId: null,
+
+    name: null,
+    status: null,
+
+    createdAt: null,
+    updatedAt: null
+};

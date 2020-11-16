@@ -3,7 +3,7 @@ import { Component, Inject, PLATFORM_ID } from '@angular/core';
 import { AppService } from '@app/app.service';
 
 import * as models from '@models';
-import { switchMap } from 'rxjs/operators';
+import { filter, map, scan, switchMap, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-root',
@@ -14,7 +14,15 @@ export class AppComponent {
   title = 'task334';
 
   tasks$ = this.app.auth.userId$.pipe(
-    switchMap(userId => this.app.tasks.getTasks(userId))
+    switchMap(userId => this.app.tasks.tasksChanges(userId)),
+    filter(tasks => tasks.every(task => !!(task?.createdAt && task.updatedAt))),
+    scan((pre: models.Task[], cur: models.Task[]) => {
+      return pre.concat(cur.filter(t => !pre.map(t => t.id).includes(t.id)));
+    }, []),
+    tap(tasks => console.debug('tasks:', tasks)),
+    map((tasks: models.Task[]) => tasks.sort((a, b) => {
+      return (a.createdAt as moment.Moment).diff(b.createdAt as moment.Moment);
+    }))
   );
 
 	constructor(
@@ -27,5 +35,12 @@ export class AppComponent {
   
   onTaskStatusChange([task, status]: [models.Task, models.TaskStatus]) {
     this.app.tasks.updateTask({...task, status: status});
+  }
+
+  onAddButtonClick() {
+    console.debug('add button is clicked.');
+    this.app.router.navigate(['/', 'add']);
+    console.debug('add button is clicked Ed.');
+
   }
 }

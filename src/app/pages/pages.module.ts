@@ -18,9 +18,9 @@ export function addData(canActivate, data: {}) {
 
 const routes: Routes = [
 	{
-		path: 'task',
+		path: 'add',
     loadChildren: () => import('./task/task.module').then(m => m.TaskModule),
-    ...addData(redirectLoggedIn, {animation: 'AddTaskPage'})
+    ...addData(redirectUnauthorized, {animation: 'AddTaskPage'})
 	},
 	{
 		path: 'login',

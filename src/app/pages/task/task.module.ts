@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
 import { TaskPage } from './task.page';
+import { AddTaskModule } from '@components/templates';
 
 const routes: Routes = [
 	{
@@ -15,6 +16,7 @@ const routes: Routes = [
   declarations: [TaskPage],
   imports: [
     CommonModule,
+    AddTaskModule,
     RouterModule.forChild(routes)
   ],
   exports: [TaskPage]
