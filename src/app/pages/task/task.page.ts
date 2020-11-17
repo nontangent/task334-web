@@ -34,15 +34,13 @@ export class TaskPage implements OnInit {
   onAddButtonClick() {
     if (this.formGroup.invalid || !this.userId) return;
 
-    this.app.tasks.addTask({
-      ...models.nullTask,
-      ownerId: this.userId,
-      name: this.formGroup.get('taskName').value
-    }).then(() => {
+    const str = this.formGroup.get('taskName').value;
+    const tasks = this.app.tasks.convertStrToTasks(str, this.userId);
+
+    this.app.tasks.addTasks(tasks).then(() => {
       this.formGroup.reset();
       history.back();
     });
-
   }
 
 }

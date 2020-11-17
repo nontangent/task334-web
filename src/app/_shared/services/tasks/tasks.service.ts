@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import {map, switchMap} from 'rxjs/operators';
 import * as models from '@models';
-import { M } from '@nontangent/firebase-model-utilities';
+import { M, generateId } from '@nontangent/firebase-model-utilities';
 import * as firebase from 'firebase/app';
 
 export function parseUserId(path: string) {
@@ -14,12 +14,14 @@ export function parseUserId(path: string) {
 })
 export class TasksService {
 
+  static readonly fields = ['name', 'status', 'createdAt', 'updatedAt'];
+
   constructor(
-    private firestore: AngularFirestore
+    private db: AngularFirestore
   ) { }
 
   private getTasksCollectionRef(userId: string) {
-    return this.firestore.collection(`users/${userId}/tasks`, (r) => {
+    return this.db.collection(`users/${userId}/tasks`, (r) => {
       return r.where('status', '==', models.TaskStatus.WIP).orderBy('createdAt')
     });
   }
@@ -45,11 +47,10 @@ export class TasksService {
   }
 
   private _setTask(task: models.Task): Promise<void> {
-    const fields = ['name', 'status', 'createdAt', 'updatedAt'];
     const data = new M({
       ...task
-    }).toTimestamp(firebase.firestore).filterProps(fields).data();
-    return this.firestore.doc(`users/${task.ownerId}/tasks/${task.id}`).set(data);
+    }).toTimestamp(firebase.firestore).filterProps(TasksService.fields).data();
+    return this.db.doc(`users/${task.ownerId}/tasks/${task.id}`).set(data);
   }
 
   updateTask(task: models.Task): Promise<void> {
@@ -60,12 +61,11 @@ export class TasksService {
   }
 
   private _addTask(task: models.Task): Promise<any> {
-    const fields = ['name', 'status', 'createdAt', 'updatedAt'];
-    return this.firestore.collection(`users/${task.ownerId}/tasks`).add(new M({
+    return this.db.collection(`users/${task.ownerId}/tasks`).add(new M({
       ...task,
       createdAt: models.FieldValue.serverTimestamp(),
       updatedAt: models.FieldValue.serverTimestamp()
-    }).toTimestamp(firebase.firestore).filterProps(fields).data());
+    }).toTimestamp(firebase.firestore).filterProps(TasksService.fields).data());
   }
 
   addTask(task: models.Task): Promise<any> {
@@ -75,6 +75,20 @@ export class TasksService {
     });
   }
 
+  addTasks(tasks: models.Task[]): Promise<void> {
+    const batch = this.db.firestore.batch();
+
+    for (const task of tasks) {
+      const ref = this.db.doc(`users/${task.ownerId}/tasks/${generateId()}`).ref;
+      batch.set(ref, new M({
+        ...task,
+        createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+        updatedAt: firebase.firestore.FieldValue.serverTimestamp(),
+      }).toTimestamp(firebase.firestore).filterProps(TasksService.fields).data());
+    }
+
+    return batch.commit();
+  }
 
   doneTask(task: models.Task): Promise<void> {
     return this.updateTask({
@@ -88,6 +102,20 @@ export class TasksService {
       ...task,
       status: models.TaskStatus.LEFT
     });
+  }
+
+  convertStrToTasks(str: string, ownerId: string) {
+    const names: string[] = str.replace(/　/g, ' ') //全角スペースを半角スペースに変換
+    .replace(/\s/g, ' ') //改行タグを削除
+    .split(' ') // 半角スペースで分割
+    .filter(c => c !== ''); //空白を削除
+
+    return names.map(name => ({
+      ...models.nullTask,
+      ownerId: ownerId,
+      name: name,
+      status: models.TaskStatus.WIP
+    }) as models.Task)
   }
 
 }
