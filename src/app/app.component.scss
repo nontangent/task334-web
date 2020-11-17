@@ -1,3 +1,17 @@
+@import 'host-variable';
+$host: host('task');
+
+:host {
+    @media screen and (max-width: 425px) {
+        @include hvar(--cell, calc(100vw / 45));
+    }
+
+    @media screen and (min-width: 426px) {
+        @include hvar(--cell, 8px);
+    }
+}
+
+
 :host {
     display: flex;
     justify-content: center;
@@ -8,10 +22,10 @@
     background-color: black;
 
     frames-overlay {
-        --width: 360px;
+        --width: calc(hvar(--cell) * 45);
 
         templates-task-list {
-            --width: 360px;
+            --width: calc(hvar(--cell) * 45);
         }
     }
 
