@@ -42,6 +42,7 @@ $host: host('atomic-frame-sp');
         overflow: hidden;
 
         * {
+            --cell: #{hvar(--cell)};
             --width: #{hvar(--width)};
             --height: #{hvar(--height)};
         }
@@ -57,6 +58,7 @@ $host: host('atomic-frame-sp');
         height: auto;
 
         * {
+            --cell: #{hvar(--cell)};
             --width: #{hvar(--width)};
             --height: #{hvar(--height)};
         }

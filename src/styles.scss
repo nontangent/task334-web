@@ -1,5 +1,21 @@
 /* You can add global styles to this file, and also import other style files */
-@import '@angular/material/prebuilt-themes/deeppurple-amber.css';
+// @import '@angular/material/prebuilt-themes/deeppurple-amber.css';
+
+@import '~@angular/material/theming';
+
+// Angular Material の共通スタイルをインクルード
+@include mat-core();
+
+// 色定義： オプションは hue カラーパレットで色コード指定, 参照: https://material.io/design/color/ and https://material.io/tools/color/
+$app-primary: mat-palette($mat-light-blue, 600);
+$app-accent:  mat-palette($mat-cyan, 600);
+$app-warn:    mat-palette($mat-pink, 500, 900, A100);
+
+// テーマとして色定義をまとめる
+$app-theme: mat-light-theme($app-primary, $app-accent, $app-warn);
+
+// カスタムテーマを適用
+@include angular-material-theme($app-theme);
 
 body {
     margin: 0px !important;

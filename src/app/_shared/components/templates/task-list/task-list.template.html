@@ -27,4 +27,14 @@
       <mat-divider></mat-divider>
     </ng-container>
   </mat-list>
+
+  <button 
+    class="add task" 
+    mat-fab 
+    color="primary" 
+    aria-label="Add Task Button"
+    (click)="onAddTaskButtonClick.emit()"
+  >
+    <mat-icon>add</mat-icon>
+  </button>
 </div>

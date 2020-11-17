@@ -4,4 +4,35 @@ $host: host('add-task');
 
 :host {
 	@include template($host);
+	@include hvar(--navigator-height, calc(var(--cell) * 7));
+}
+
+:host {
+	mat-toolbar {
+		background: white;
+		height: hvar(--navigator-height);
+
+		button.add {
+			border-radius: calc(hvar(--navigator-height) * 7 / 2);
+		}
+	}
+
+	div.contents {
+		height: calc(100vh - hvar(--navigator-height));
+
+		form {
+			width: hvar(--width);
+			height: calc(100vh - hvar(--navigator-height));
+		}
+
+		textarea {
+			margin: 0px;
+			width: calc(hvar(--width) - hvar(--cell) * 6);
+			height: calc(100% - hvar(--cell) * 6);
+			border: 0px;
+			font-size: calc(hvar(--cell) * 2);
+			outline: 0px;
+			padding: calc(hvar(--cell) * 3);
+		}
+	}
 }

@@ -22,17 +22,12 @@ $host: host('task');
     background-color: black;
 
     frames-overlay {
+        --cell: #{hvar(--cell)};
         --width: calc(hvar(--cell) * 45);
+        --height: 100vh;
 
         templates-task-list {
             --width: calc(hvar(--cell) * 45);
         }
-    }
-
-    button.add.task {
-        position: fixed;
-        z-index: 1000;
-        right: 16px;
-        bottom: 16px;
     }
 }

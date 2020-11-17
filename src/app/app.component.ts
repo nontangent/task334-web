@@ -37,7 +37,7 @@ export class AppComponent {
     this.app.tasks.updateTask({...task, status: status});
   }
 
-  onAddButtonClick() {
+  onAddTaskButtonClick() {
     console.debug('add button is clicked.');
     this.app.router.navigate(['/', 'add']);
     console.debug('add button is clicked Ed.');

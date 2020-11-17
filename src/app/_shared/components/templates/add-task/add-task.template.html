@@ -1,17 +1,15 @@
 <div class="navigator container">
-    <mat-toolbar style="display: flex; justify-content: space-between;">
+    <mat-toolbar style="display: flex; justify-content: space-between;" color="basic">
         <button mat-icon-button (click)="onBackButtonClick.emit()" aria-label="Back Button">
-            <mat-icon>close</mat-icon>
+            <mat-icon color="primary">close</mat-icon>
         </button>
-        <button mat-flat-button (click)="onAddButtonClick.emit()" aria-label="Add Button">
+        <button class="add" mat-flat-button color="primary" (click)="onAddButtonClick.emit()" aria-label="Add Button">
             Add
         </button>
     </mat-toolbar>
 </div>
 <div class="contents">
-    <form [formGroup]="formGroup" style="width: 100%; height: 100%;">        
-        <mat-form-field style="width: 100%; height: 100%;">
-            <textarea matInput placeholder="タスク名を入力" formControlName="taskName"></textarea>
-        </mat-form-field>
+    <form [formGroup]="formGroup">        
+        <textarea matInput placeholder="いまなにする？" formControlName="taskName"></textarea>
     </form>
 </div>

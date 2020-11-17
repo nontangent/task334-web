@@ -26,6 +26,9 @@ export class TaskListTemplate implements OnInit, AfterViewInit {
   @Output()
   onTaskStatusChange = new EventEmitter();
 
+  @Output()
+  onAddTaskButtonClick = new EventEmitter();
+
   width: number = 0;
 
   constructor(private el: ElementRef) { }

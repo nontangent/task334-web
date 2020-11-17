@@ -3,9 +3,10 @@
 
 @mixin page($host) {
 	@include component($host);
-  @include hvar(--width, calc(#{hvar(--cell)} * 45));
-  @include hvar(--height, 100vh);
+  @include hvar(--width, inherit);
+  @include hvar(--height, inherit);
 
+  position: absolute;
   width: hvar(--width);
   height: hvar(--height);
 

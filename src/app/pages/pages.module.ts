@@ -20,12 +20,12 @@ const routes: Routes = [
 	{
 		path: 'add',
     loadChildren: () => import('./task/task.module').then(m => m.TaskModule),
-    ...addData(redirectUnauthorized, {animation: 'AddTaskPage'})
+    ...addData(redirectUnauthorized, {animation: 'PopUpPage'})
 	},
 	{
 		path: 'login',
     loadChildren: () => import('./login/login.module').then(m => m.LoginModule),
-    ...addData(redirectLoggedIn, {animation: 'LoginPage'})
+    ...addData(redirectLoggedIn, {animation: 'PopUpPage'})
 	},
   {
     path: '',
