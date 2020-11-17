@@ -35,7 +35,7 @@ export class TaskPage implements OnInit {
     if (this.formGroup.invalid || !this.userId) return;
 
     const str = this.formGroup.get('taskName').value;
-    const tasks = this.app.tasks.convertStrToTasks(str, this.userId);
+    const tasks: models.Task[] = this.app.tasks.convertStrToTasks(str, this.userId);
 
     this.app.tasks.addTasks(tasks).then(() => {
       this.formGroup.reset();
