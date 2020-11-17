@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'organisms-top-navigator',
@@ -6,6 +6,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./top-navigator.organism.scss']
 })
 export class TopNavigatorOrganism implements OnInit {
+
+  @Output()
+  onSignOutButtonClick = new EventEmitter();
 
   constructor() { }
 

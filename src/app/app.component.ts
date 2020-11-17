@@ -1,8 +1,7 @@
-import { isPlatformBrowser } from '@angular/common';
-import { Component, Inject, PLATFORM_ID } from '@angular/core';
+import { Component } from '@angular/core';
 import { AppService } from '@app/app.service';
 
-import * as models from '@models';
+import * as models from '@task334/models';
 import { filter, map, scan, switchMap, tap } from 'rxjs/operators';
 
 @Component({
@@ -41,6 +40,11 @@ export class AppComponent {
     console.debug('add button is clicked.');
     this.app.router.navigate(['/', 'add']);
     console.debug('add button is clicked Ed.');
+  }
 
+  onSignOutButtonClick() {
+    this.app.auth.signOut().then(() => {
+      this.app.router.navigate(['/', 'login']);
+    });
   }
 }

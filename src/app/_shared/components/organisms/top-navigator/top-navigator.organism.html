@@ -1,8 +1,13 @@
-<mat-toolbar color="primary">
-    <mat-toolbar-row>
-      <!-- <span># TASK334</span> -->
-      <atoms-task334-icon></atoms-task334-icon>
-      <atoms-task334-logo></atoms-task334-logo>
-    </mat-toolbar-row>
+<mat-toolbar color="primary" style="display: flex; align-items: center; justify-content: space-between;">
+  <div class="spacer"></div>
+  <div style="display: flex; align-items: center; justify-content: center;">
+    <atoms-task334-icon></atoms-task334-icon>
+    <atoms-task334-logo></atoms-task334-logo>
+  </div>
+  <div>
+    <button mat-icon-button (click)="onSignOutButtonClick.emit()">
+      <mat-icon color="primary">logout</mat-icon>
+    </button>
+  </div>
 </mat-toolbar>
 <mat-divider></mat-divider>

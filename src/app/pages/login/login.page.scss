@@ -8,8 +8,9 @@ $host: host('login');
 
 :host {
 	frames-overlay {
+		--width: #{hvar(--width)};
 		templates-login {
-			--width: 360px;
+			--width: #{hvar(--width)};
 		}
 	}
 }

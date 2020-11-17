@@ -3,6 +3,7 @@
 		[tasks]="tasks$ | async"
 		(onTaskStatusChange)="onTaskStatusChange($event)"
 		(onAddTaskButtonClick)="onAddTaskButtonClick()"
+		(onSignOutButtonClick)="onSignOutButtonClick()"
 		mainPage
 	></templates-task-list>
 	<router-outlet #outlet="outlet" nextPage></router-outlet>

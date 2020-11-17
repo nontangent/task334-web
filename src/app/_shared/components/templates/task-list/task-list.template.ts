@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, ElementRef, AfterViewInit, Output, EventEmitter } from '@angular/core';
-import * as models from '@models';
+import * as models from '@task334/models';
 import { CdkDrag, CdkDragEnd, CdkDragMove, CdkDragStart } from '@angular/cdk/drag-drop';
 
 enum Mode {
@@ -28,6 +28,9 @@ export class TaskListTemplate implements OnInit, AfterViewInit {
 
   @Output()
   onAddTaskButtonClick = new EventEmitter();
+
+  @Output()
+  onSignOutButtonClick = new EventEmitter();
 
   width: number = 0;
 

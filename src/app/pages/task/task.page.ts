@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Validators } from '@angular/forms';
 import { AppService } from '@app/app.service';
 
-import * as models from '@models';
+import * as models from '@task334/models';
 import { Observable } from 'rxjs';
 
 @Component({

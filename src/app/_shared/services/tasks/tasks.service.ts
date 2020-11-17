@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import {map, switchMap} from 'rxjs/operators';
-import * as models from '@models';
+import * as models from '@task334/models';
 import { M, generateId } from '@nontangent/firebase-model-utilities';
 import * as firebase from 'firebase/app';
 
@@ -56,15 +56,15 @@ export class TasksService {
   updateTask(task: models.Task): Promise<void> {
     return this._setTask({
       ...task,
-      updatedAt: models.FieldValue.serverTimestamp()
+      updatedAt: firebase.firestore.FieldValue.serverTimestamp()
     });
   }
 
   private _addTask(task: models.Task): Promise<any> {
     return this.db.collection(`users/${task.ownerId}/tasks`).add(new M({
       ...task,
-      createdAt: models.FieldValue.serverTimestamp(),
-      updatedAt: models.FieldValue.serverTimestamp()
+      createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+      updatedAt: firebase.firestore.FieldValue.serverTimestamp()
     }).toTimestamp(firebase.firestore).filterProps(TasksService.fields).data());
   }
 
