@@ -30,16 +30,16 @@ export class AuthService {
   signInWithTwitter() {
     const provider = new firebase.auth.TwitterAuthProvider();
     return firebase.auth().signInWithPopup(provider).then((result) => {
-      const userId = result?.user?.uid;
+      const userId = result.user?.uid;
       if (!userId) return;
 
       const twitter: models.Twitter = {
         id: (result?.additionalUserInfo as any)?.profile?.id_str,
-        accessToken: (result?.credential as any)?.accessToken,
-        secret: (result?.credential as any)?.secret
+        accessToken: (result.credential as any)?.accessToken,
+        secret: (result.credential as any)?.secret
       };
 
-      if(result.additionalUserInfo.isNewUser) {
+      if (result?.additionalUserInfo?.isNewUser) {
         return this.createUser({
           ...models.nullUser,
           id: userId,
