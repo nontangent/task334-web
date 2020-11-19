@@ -3,6 +3,8 @@
 ></organisms-top-navigator>
 
 <div class="contents" style="position: relative;">
+  <div *ngIf="!tasks?.length" class="message container">タスクを追加するとTwitterで共有されます。</div>
+
   <mat-list class="bg" role="list" style="position: absolute; top: 0; left: 0;">
     <ng-container *ngFor="let task of tasks;index as i;">
       <mat-list-item role="listitem" style="display: flex; justify-content: space-between;">

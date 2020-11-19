@@ -18,6 +18,16 @@ $host: host('task-list');
 
 		background-color: #F0F0F0;
 
+		.message.container {
+			width: calc(hvar(--width) - hvar(--cell) * 4);
+			padding-top: calc(hvar(--cell) * 2);
+			padding-left: calc(hvar(--cell) * 2);
+			padding-right: calc(hvar(--cell) * 2);
+
+			line-height: 1.5rem;
+			color: #8899A6;
+		}
+
 		button.add.task {
 			position: fixed;
 			z-index: 1000;
