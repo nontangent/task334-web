@@ -1,15 +1,16 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AppService } from '@app/app.service';
 
 import * as models from '@task334/models';
 import { filter, map, scan, switchMap, tap } from 'rxjs/operators';
+
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'task334';
 
   tasks$ = this.app.auth.userId$.pipe(
@@ -27,6 +28,8 @@ export class AppComponent {
 	constructor(
     public app: AppService
   ) { }
+
+  ngOnInit() { }
 
 	onTwitterLoginButtonClick() {
     this.app.auth.signInWithTwitter();

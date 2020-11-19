@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { AppService } from '@app/app.service';
 
 @Component({
@@ -10,24 +9,25 @@ import { AppService } from '@app/app.service';
 export class LoginPage implements OnInit {
 
   constructor(
-    private router: Router,
-    public appService: AppService
+    public app: AppService
   ) { }
 
   ngOnInit(): void {
   }
 
-  onBackButtonClick($event: any) {
-    this.router.navigate(['/']);
+  onBackButtonClick() {
+    this.app.router.navigate(['/']);
   }
 
-  onTwitterSignInButtonClick($event: any) {
+  onTwitterSignInButtonClick() {
     
-    this.appService.auth.signInWithTwitter().then((success) => {
-      console.debug('success:', success);
-      this.router.navigate(['/']);
+    this.app.auth.signInWithTwitter().then(() => {
+      console.debug('Sign in success!');
+      this.app.router.navigate(['/']);
     }).catch((error) => {
-      console.debug('error:', error);
+      console.error('Error:', error);
+      this.app.snackBar.openSnackBar('サインインに失敗しました。');
+      throw error;
     });
 
   } 

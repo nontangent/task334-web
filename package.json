@@ -32,6 +32,8 @@
     "@angular/router": "^10.2.3",
     "@angular/service-worker": "^10.2.3",
     "@nguniversal/express-engine": "^10.1.0",
+    "@sentry/angular": "^5.27.4",
+    "@sentry/tracing": "^5.27.4",
     "express": "^4.17.1",
     "express-metatag": "^0.1.0",
     "firebase": "^7.24.0",
