@@ -2,11 +2,14 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 
 @Component({
-  selector: 'templates-add-task',
-  templateUrl: './add-task.template.html',
-  styleUrls: ['./add-task.template.scss']
+  selector: 'templates-task',
+  templateUrl: './task.template.html',
+  styleUrls: ['./task.template.scss']
 })
-export class AddTaskTemplate implements OnInit {
+export class TaskTemplate implements OnInit {
+
+  @Input()
+  submitButtonValue: string = 'ADD';
 
   @Input()
   formGroup = this.fb.group({
@@ -17,7 +20,7 @@ export class AddTaskTemplate implements OnInit {
   onBackButtonClick = new EventEmitter();
 
   @Output()
-  onAddButtonClick = new EventEmitter();
+  onSubmit = new EventEmitter();
 
   constructor(
     private fb: FormBuilder
@@ -25,5 +28,4 @@ export class AddTaskTemplate implements OnInit {
 
   ngOnInit(): void {
   }
-
 }

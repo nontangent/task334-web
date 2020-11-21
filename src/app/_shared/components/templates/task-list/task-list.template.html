@@ -24,6 +24,7 @@
         (cdkDragStarted)="dragStarted($event)"
         (cdkDragMoved)="dragMoved($event)"
         (cdkDragEnded)="dragEnded($event, task)"
+        (dblclick)="onTaskDblClick.emit(task)"
         [attr.mode]="Mode.WIP"
       >
         {{ i }}.{{ task.name }}

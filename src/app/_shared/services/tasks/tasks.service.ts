@@ -35,11 +35,20 @@ export class TasksService {
       } as models.Task).toMoment(firebase.firestore).data()))
     );
   }
+  getTask(userId: string, taskId: string) {
+    return this.db.doc(`users/${userId}/tasks/${taskId}`).get().pipe(
+      map(doc => new M({
+        ...doc.data(),
+        id: doc.id,
+        ownerId: userId
+      }).toMoment(firebase.firestore).data())
+    );
+  }
 
   getTasks(userId: string) {
     return this.getTasksCollectionRef(userId).get().pipe(
       map(snapshot => snapshot.docs.map(doc => new M({
-        ...(doc.data() as any),
+        ...doc.data(),
         id: doc.id,
         ownerId: parseUserId(doc.ref.path)
       } as models.Task).toMoment(firebase.firestore).data()))
@@ -102,6 +111,31 @@ export class TasksService {
       ...task,
       status: models.TaskStatus.LEFT
     });
+  }
+
+  divideTask(divided: models.Task, tasks: models.Task[]) {
+    const batch = this.db.firestore.batch();
+
+    const ref = this.db.doc(`users/${divided.ownerId}/tasks/${divided.id}`).ref;
+    const data = new M({
+      ...divided,
+      status: models.TaskStatus.DIVIDED,
+      updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+    }).toTimestamp(firebase.firestore).data();
+    batch.update(ref, data);
+
+    for (const task of tasks) {
+      const ref = this.db.doc(`users/${task.ownerId}/tasks/${generateId()}`).ref;
+      const data = new M({
+        ...task,
+        status: models.TaskStatus.WIP,
+        createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+        updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+      }).toTimestamp(firebase.firestore).data();
+      batch.set(ref, data);
+    }
+
+    return batch.commit();
   }
 
   convertStrToTasks(str: string, ownerId: string) {

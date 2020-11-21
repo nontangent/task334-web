@@ -30,6 +30,9 @@ export class TaskListTemplate implements OnInit, AfterViewInit {
   onAddTaskButtonClick = new EventEmitter();
 
   @Output()
+  onTaskDblClick = new EventEmitter();
+
+  @Output()
   onSignOutButtonClick = new EventEmitter();
 
   width: number = 0;

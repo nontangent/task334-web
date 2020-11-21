@@ -3,8 +3,8 @@
         <button mat-icon-button (click)="onBackButtonClick.emit()" aria-label="Back Button">
             <mat-icon color="primary">close</mat-icon>
         </button>
-        <button class="add" mat-flat-button color="primary" (click)="onAddButtonClick.emit()" aria-label="Add Button">
-            Add
+        <button class="add" mat-flat-button color="primary" (click)="onSubmit.emit()" aria-label="Submit Button">
+            {{ submitButtonValue }}
         </button>
     </mat-toolbar>
 </div>

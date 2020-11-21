@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AddTaskTemplate } from './add-task.template';
+import { TaskTemplate } from './task.template';
 
-describe('AddTaskTemplate', () => {
-  let component: AddTaskTemplate;
-  let fixture: ComponentFixture<AddTaskTemplate>;
+describe('TaskTemplate', () => {
+  let component: TaskTemplate;
+  let fixture: ComponentFixture<TaskTemplate>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AddTaskTemplate ]
+      declarations: [ TaskTemplate ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(AddTaskTemplate);
+    fixture = TestBed.createComponent(TaskTemplate);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

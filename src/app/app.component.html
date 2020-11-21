@@ -1,6 +1,7 @@
 <frames-overlay [outlet]="outlet">
 	<templates-task-list 
 		[tasks]="tasks$ | async"
+		(onTaskDblClick)="onTaskDblClick($event)"
 		(onTaskStatusChange)="onTaskStatusChange($event)"
 		(onAddTaskButtonClick)="onAddTaskButtonClick()"
 		(onSignOutButtonClick)="onSignOutButtonClick()"

@@ -41,8 +41,12 @@ export class AppComponent implements OnInit {
 
   onAddTaskButtonClick() {
     console.debug('add button is clicked.');
-    this.app.router.navigate(['/', 'add']);
+    this.app.router.navigate(['/', 'tasks', 'add']);
     console.debug('add button is clicked Ed.');
+  }
+
+  onTaskDblClick(task: models.Task) {
+    this.app.router.navigate(['/', 'tasks', task.id]);
   }
 
   onSignOutButtonClick() {

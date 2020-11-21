@@ -1,5 +1,6 @@
-<templates-add-task
+<templates-task
+    [submitButtonValue]="mode"
     [formGroup]="formGroup"
     (onBackButtonClick)="onBackButtonClick()"
-    (onAddButtonClick)="onAddButtonClick()"
-></templates-add-task>
+    (onSubmit)="onSubmit()"
+></templates-task>

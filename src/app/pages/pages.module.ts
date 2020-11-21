@@ -18,10 +18,10 @@ export function addData(canActivate, data: {}) {
 
 const routes: Routes = [
 	{
-		path: 'add',
+		path: 'tasks/add',
     loadChildren: () => import('./task/task.module').then(m => m.TaskModule),
     ...addData(redirectUnauthorized, {animation: 'PopUpPage'})
-	},
+  },
 	{
 		path: 'login',
     loadChildren: () => import('./login/login.module').then(m => m.LoginModule),
@@ -33,6 +33,11 @@ const routes: Routes = [
 		loadChildren: () => import('./index/index.module').then(m => m.IndexModule),
     ...addData(redirectUnauthorized, {animation: 'IndexPage'})
   },
+  {
+		path: 'tasks/:taskId',
+    loadChildren: () => import('./task/task.module').then(m => m.TaskModule),
+    ...addData(redirectUnauthorized, {animation: 'PopUpPage'})
+	},
   {
     path: '**',
     redirectTo: ''
