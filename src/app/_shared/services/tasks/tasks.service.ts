@@ -22,7 +22,7 @@ export class TasksService {
 
   private getTasksCollectionRef(userId: string) {
     return this.db.collection(`users/${userId}/tasks`, (r) => {
-      return r.where('status', '==', models.TaskStatus.WIP).orderBy('createdAt')
+      return r.where('status', 'in', [models.TaskStatus.WIP, models.TaskStatus.DIVIDED]).orderBy('createdAt')
     });
   }
 

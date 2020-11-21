@@ -16,9 +16,11 @@ export class AppComponent implements OnInit {
   tasks$ = this.app.auth.userId$.pipe(
     switchMap(userId => this.app.tasks.tasksChanges(userId)),
     filter(tasks => tasks.every(task => !!(task?.createdAt && task.updatedAt))),
-    scan((pre: models.Task[], cur: models.Task[]) => {
-      return pre.concat(cur.filter(t => !pre.map(t => t.id).includes(t.id)));
-    }, []),
+    scan((pre: models.Task[], cur: models.Task[]) => Object.values({
+        ...pre.reduce((p, n) => ({...p, [n.id]: n}), {}),
+        ...cur.reduce((p, n) => ({...p, [n.id]: n}), {})
+    }), []),
+    map(tasks => tasks.filter((task: models.Task) => task.status === models.TaskStatus.WIP)),
     tap(tasks => console.debug('tasks:', tasks)),
     map((tasks: models.Task[]) => tasks.sort((a, b) => {
       return (a.createdAt as moment.Moment).diff(b.createdAt as moment.Moment);
