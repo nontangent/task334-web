@@ -138,6 +138,13 @@ export class TasksService {
     return batch.commit();
   }
 
+  renameTask(task: models.Task, name: string): Promise<void> {
+    return this.db.doc(`users/${task.ownerId}/tasks/${task.id}`).update({
+      name: name,
+      updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+    });
+  }
+
   convertStrToTasks(str: string, ownerId: string) {
     const names: string[] = str.replace(/　/g, ' ') //全角スペースを半角スペースに変換
     .replace(/\s/g, ' ') //改行タグを削除

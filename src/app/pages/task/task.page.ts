@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Params } from '@angular/router';
 import { AppService } from '@app/app.service';
 
 import * as models from '@task334/models';
@@ -9,7 +9,8 @@ import { distinctUntilChanged, filter, map, switchMap } from 'rxjs/operators';
 
 export enum Mode {
   ADD = 'ADD',
-  DIVIDE = 'DIVIDE'
+  DIVIDE = 'DIVIDE',
+  RENAME = 'RENAME'
 }
 
 @Component({
@@ -18,13 +19,9 @@ export enum Mode {
   styleUrls: ['./task.page.scss']
 })
 export class TaskPage implements OnInit {
-
-  Mode = Mode;
-  mode: Mode = Mode.ADD;
-  mode$: Observable<Mode> = this.route.paramMap.pipe(
-    map(paramsMap => paramsMap.get('taskId')),
-    map(taskId => taskId ? Mode.DIVIDE : Mode.ADD)
-  );
+  formGroup = this.app.form.group({
+    'taskName': ['', Validators.required]
+  });
 
   userId: string = null;
   userId$: Observable<string> = this.app.auth.userId$;
@@ -40,9 +37,28 @@ export class TaskPage implements OnInit {
     switchMap(([userId, taskId]) => this.app.tasks.getTask(userId, taskId))
   );
 
-  formGroup = this.app.form.group({
-    'taskName': ['', Validators.required]
-  });
+  tasks: models.Task[] = [];
+  tasks$: Observable<models.Task[]> = combineLatest([
+    this.userId$,
+    this.formGroup.get('taskName').valueChanges
+  ]).pipe(
+    map(([userId, str]: [string, string]) => this.app.tasks.convertStrToTasks(str, userId)),
+    distinctUntilChanged((pre, cur) => JSON.stringify(pre) === JSON.stringify(cur))
+  );
+
+  Mode = Mode;
+  mode: Mode = Mode.ADD;
+  mode$: Observable<Mode> = combineLatest([
+    this.tasks$,
+    this.route.paramMap
+  ]).pipe(
+    map(([tasks, paramsMap]: [models.Task[], Params]) => {
+      const taskId = paramsMap.get('taskId');
+      return (!taskId) ? Mode.ADD
+        : (tasks.length <= 1) ? Mode.RENAME
+        : Mode.DIVIDE;
+    })
+  );
 
   constructor(
     public app: AppService,
@@ -56,6 +72,7 @@ export class TaskPage implements OnInit {
       this.task = task;
       this.formGroup.get('taskName').setValue(task.name);
     });
+    this.tasks$.subscribe(tasks => this.tasks = tasks);
   }
 
   onBackButtonClick() {
@@ -65,27 +82,20 @@ export class TaskPage implements OnInit {
   onSubmit() {
     if (this.formGroup.invalid || !this.userId) return;
 
-    const str = this.formGroup.get('taskName').value;
-    const tasks: models.Task[] = this.app.tasks.convertStrToTasks(str, this.userId);
+    this.dealTask().then(() => {
+      history.back();
+    }).catch((error) => {
+      this.app.snackBar.openSnackBar('エラーが発生しました。');
+      throw error;
+    });
+  }
 
+  dealTask(): Promise<void> {
     switch (this.mode) {
-      case Mode.ADD: return this.addTasks(tasks);
-      case Mode.DIVIDE: return this.divideTask(tasks);
+      case Mode.ADD: return this.app.tasks.addTasks(this.tasks);
+      case Mode.DIVIDE: return this.app.tasks.divideTask(this.task, this.tasks);
+      case Mode.RENAME: return this.app.tasks.renameTask(this.task, this.tasks?.[0]?.name)
     }
-  }
-
-  addTasks(tasks: models.Task[]) {
-    this.app.tasks.addTasks(tasks).then(() => {
-      this.formGroup.reset();
-      history.back();
-    });
-  }
-
-  divideTask(tasks: models.Task[]) {
-    this.app.tasks.divideTask(this.task, tasks).then(() => {
-      this.formGroup.reset();
-      history.back();
-    });
   }
 
 }
