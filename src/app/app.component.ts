@@ -23,7 +23,7 @@ export class AppComponent implements OnInit {
     map(tasks => tasks.filter((task: models.Task) => task.status === models.TaskStatus.WIP)),
     tap(tasks => console.debug('tasks:', tasks)),
     map((tasks: models.Task[]) => tasks.sort((a, b) => {
-      return (a.createdAt as moment.Moment).diff(b.createdAt as moment.Moment);
+      return a.name.localeCompare(b.name)
     }))
   );
 
