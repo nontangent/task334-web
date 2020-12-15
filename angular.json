@@ -224,14 +224,7 @@
         },
         "deploy": {
           "builder": "@angular/fire:deploy",
-          "options": {
-            "ssr": true,
-            "functionsRuntimeOptions": {
-              "memory": "2GB",
-              "timeoutSeconds": 120
-            }
-          }
-          
+          "options": { }
         }
       }
     }

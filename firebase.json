@@ -2,7 +2,7 @@
   "hosting": [
     {
       "target": "task334",
-      "public": "dist/task334/dist/task334/browser",
+      "public": "dist/task334/browser",
       "ignore": [
         "**/.*"
       ],
@@ -16,16 +16,7 @@
             }
           ]
         }
-      ],
-      "rewrites": [
-        {
-          "source": "**",
-          "function": "ssr"
-        }
       ]
     }
-  ],
-  "functions": {
-    "source": "dist/task334"
-  }
+  ]
 }
